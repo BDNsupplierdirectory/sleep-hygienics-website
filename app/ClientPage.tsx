@@ -501,7 +501,7 @@ export default function ClientPage() {
               src="/lifestyle.jpg"
               alt="Dog sleeping on the Rx Clinical Pet Blanket"
               fill
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover object-top"
             />
           </div>
 
