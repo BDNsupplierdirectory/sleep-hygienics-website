@@ -719,21 +719,39 @@ export default function ClientPage() {
       {/* ============================================================ */}
       <footer className="py-12 bg-slate-800 text-center text-sm text-white/40">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="flex items-center justify-center gap-2.5 mb-4">
-             <Image
-                src="/logo.avif"
-                alt="Sleep Hygienics Ltd. Logo"
-                width={150}
-                height={50}
-                className="h-8 w-auto brightness-0 invert opacity-60"
-             />
-          </div>
+          
           <a
             href="mailto:info@sleephygienicsltd.com"
-            className="text-white/60 hover:text-white/80 transition inline-block mb-4 no-underline"
+            className="text-white/60 hover:text-white/80 transition inline-block mb-6 text-base font-medium no-underline"
           >
             info@sleephygienicsltd.com
           </a>
+
+          {/* PARTNERS SECTION */}
+          <div className="mb-8 border-t border-white/10 pt-6 max-w-md mx-auto">
+            <div className="text-white/30 uppercase tracking-widest text-[10px] font-bold mb-3">
+              Our Partners
+            </div>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
+              <a 
+                href="https://www.westernallergy.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-white/50 hover:text-white/80 transition no-underline"
+              >
+                Western Allergy
+              </a>
+              <a 
+                href="https://www.bdnsupplierdirectory.ca" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-white/50 hover:text-white/80 transition no-underline"
+              >
+                BDN Supplier Directory
+              </a>
+            </div>
+          </div>
+
           <p className="mt-2">
             &copy; {new Date().getFullYear()} Sleep Hygienics Ltd. All
             rights reserved.
