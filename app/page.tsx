@@ -11,37 +11,20 @@ import {
 } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
-/* SEO METADATA (APP ROUTER)                                          */
+/* SEO METADATA                                                       */
 /* ------------------------------------------------------------------ */
 export const metadata = {
   title:
     "Antimicrobial Dog Blanket for Allergies & Itching | Rx Clinical Pet Blanket",
   description:
-    "Relieve dog allergies, itching, and hot spots with a clinical-grade antimicrobial pet blanket. Designed to reduce bacteria, odor, and irritation. Vet-approved. Free shipping.",
+    "Relieve dog allergies, itching, and hot spots with a clinical-grade antimicrobial pet blanket. Made in the USA and Canada. Ships from Canada.",
   keywords: [
     "dog allergies relief",
     "antimicrobial dog blanket",
     "dog itching solution",
     "hot spots dog treatment",
-    "pet bedding allergies",
+    "pet health bedding",
   ],
-  openGraph: {
-    title:
-      "Antimicrobial Dog Blanket for Allergies & Itching | Rx Clinical Pet Blanket",
-    description:
-      "Reduce itching, odor, and bacteria with a clinical-grade antimicrobial pet blanket.",
-    url: "https://yourdomain.com",
-    siteName: "Sleep Hygienics Ltd.",
-    images: [
-      {
-        url: "/hero.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Dog with antimicrobial blanket",
-      },
-    ],
-    type: "website",
-  },
 };
 
 /* ------------------------------------------------------------------ */
@@ -49,6 +32,15 @@ export const metadata = {
 /* ------------------------------------------------------------------ */
 const STRIPE_SMALL = "https://buy.stripe.com/cNibJ0b7weL53Hu8Tt2kw01";
 const STRIPE_LARGE = "https://buy.stripe.com/9B6dR87VkgTdb9W5Hh2kw02";
+
+/* ------------------------------------------------------------------ */
+/* TYPES                                                              */
+/* ------------------------------------------------------------------ */
+type Post = {
+  Date: string;
+  Title: string;
+  Content: string;
+};
 
 /* ------------------------------------------------------------------ */
 /* COMPONENTS                                                         */
@@ -70,15 +62,9 @@ function Accordion({
         className="flex justify-between w-full px-6 py-4"
       >
         <span className="font-semibold">{title}</span>
-        <ChevronDown
-          className={`transition ${open ? "rotate-180" : ""}`}
-        />
+        <ChevronDown className={`transition ${open ? "rotate-180" : ""}`} />
       </button>
-      <div
-        className={`transition-all overflow-hidden ${
-          open ? "max-h-[1000px]" : "max-h-0"
-        }`}
-      >
+      <div className={`${open ? "max-h-[1000px]" : "max-h-0"} overflow-hidden`}>
         <div className="p-6 text-sm text-slate-600">{children}</div>
       </div>
     </div>
@@ -90,9 +76,21 @@ function Accordion({
 /* ------------------------------------------------------------------ */
 
 export default function Page() {
+  const [posts, setPosts] = useState<Post[]>([]);
   const [scrolled, setScrolled] = useState(false);
   const pricingRef = useRef<HTMLDivElement>(null);
 
+  /* ---------------- BLOG FETCH ---------------- */
+  useEffect(() => {
+    fetch(
+      "https://opensheet.elk.sh/12XZU9aQ3aIC1pGzL7WnTlun1FmzK_MFQiqzRxAc9hiM/Sheet1"
+    )
+      .then((res) => res.json())
+      .then((data) => setPosts(data.reverse()))
+      .catch(() => console.log("Blog fetch error"));
+  }, []);
+
+  /* ---------------- SCROLL ---------------- */
   useEffect(() => {
     const handler = () => {
       requestAnimationFrame(() => setScrolled(window.scrollY > 40));
@@ -109,40 +107,7 @@ export default function Page() {
   return (
     <main className="bg-white text-slate-800">
 
-      {/* ------------------------------------------------------------------ */}
-      {/* STRUCTURED DATA (PRODUCT SCHEMA)                                   */}
-      {/* ------------------------------------------------------------------ */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org/",
-            "@type": "Product",
-            name: "Rx Clinical Pet Blanket",
-            image: "/hero.jpg",
-            description:
-              "Antimicrobial pet blanket designed to reduce bacteria, odor, and irritation for dogs with allergies.",
-            brand: {
-              "@type": "Brand",
-              name: "Sleep Hygienics Ltd.",
-            },
-            offers: {
-              "@type": "Offer",
-              priceCurrency: "USD",
-              price: "79.99",
-              availability: "https://schema.org/InStock",
-              url: "https://yourdomain.com",
-            },
-            aggregateRating: {
-              "@type": "AggregateRating",
-              ratingValue: "4.8",
-              reviewCount: "124",
-            },
-          }),
-        }}
-      />
-
-      {/* HEADER */}
+      {/* ---------------- HEADER ---------------- */}
       <header
         className={`fixed top-0 w-full z-50 transition ${
           scrolled ? "bg-white shadow" : "bg-white/70"
@@ -151,9 +116,10 @@ export default function Page() {
         <div className="max-w-6xl mx-auto px-6 py-3 flex justify-between">
           <Image
             src="/logo.avif"
-            alt="Sleep Hygienics"
+            alt="Sleep Hygienics Ltd Logo"
             width={140}
             height={40}
+            priority={false}
           />
           <button
             onClick={scrollToPricing}
@@ -164,15 +130,15 @@ export default function Page() {
         </div>
       </header>
 
-      {/* HERO */}
+      {/* ---------------- HERO ---------------- */}
       <section className="pt-28 pb-20 max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
         <div>
           <h1 className="text-4xl font-bold mb-4">
             Antimicrobial Dog Blanket for Allergies, Itching & Hot Spots
           </h1>
           <p className="text-lg text-slate-600 mb-6">
-            Designed to help reduce bacteria, odor, and irritation —
-            giving your dog a cleaner, more comfortable recovery space.
+            Made in the USA and Canada. Ships from Canada. Designed to help
+            reduce bacteria, odor, and irritation for dogs with sensitive skin.
           </p>
 
           <button
@@ -181,10 +147,6 @@ export default function Page() {
           >
             Shop Now <ArrowRight className="inline ml-2" />
           </button>
-
-          <div className="mt-6 text-sm text-slate-500">
-            ⭐ 4.8/5 from 120+ pet owners
-          </div>
         </div>
 
         <Image
@@ -197,88 +159,105 @@ export default function Page() {
         />
       </section>
 
-      {/* SOCIAL PROOF */}
-      <section className="bg-slate-50 py-16 text-center">
-        <h2 className="text-2xl font-semibold mb-6">
-          Trusted by Pet Owners
-        </h2>
-        <p className="max-w-xl mx-auto text-slate-600">
-          “Within days, our dog stopped scratching constantly. This
-          blanket made a noticeable difference.”
-        </p>
+      {/* ---------------- PRICING IMAGE FIX ---------------- */}
+      <section className="max-w-4xl mx-auto px-6 mb-16">
+        <Image
+          src="/lifestyle.jpg"
+          alt="Dog sleeping on antimicrobial blanket"
+          width={960}
+          height={400}
+          sizes="100vw"
+          className="rounded-xl shadow"
+        />
       </section>
 
-      {/* FEATURES */}
-      <section className="py-20 max-w-6xl mx-auto px-6">
-        <h2 className="text-3xl font-bold mb-10 text-center">
-          Why This Works
-        </h2>
+      {/* ---------------- BLOG SECTION ---------------- */}
+      <section className="py-20 bg-slate-50">
+        <div className="max-w-5xl mx-auto px-6">
+          <h2 className="text-3xl font-bold text-center mb-10">
+            Pet Health Insights
+          </h2>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {[
-            "Helps reduce bacteria & odor",
-            "Cooling, breathable fabric",
-            "Safe, non-toxic materials",
-          ].map((f, i) => (
-            <div key={`${f}-${i}`} className="border p-6 rounded-xl">
-              <Check className="text-green-500 mb-3" />
-              {f}
-            </div>
-          ))}
+          <div className="grid md:grid-cols-2 gap-6">
+            {posts.map((post, i) => (
+              <div
+                key={i}
+                className="bg-white p-6 rounded-xl shadow-sm border"
+              >
+                <div className="text-xs text-slate-400 mb-2">
+                  {post.Date}
+                </div>
+                <h3 className="font-semibold text-lg mb-3">
+                  {post.Title}
+                </h3>
+                <p className="text-sm text-slate-600 whitespace-pre-wrap">
+                  {post.Content}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* PRICING */}
-      <section ref={pricingRef} className="py-20 bg-sky-50 text-center">
+      {/* ---------------- TECH SPECS ---------------- */}
+      <section className="py-20 max-w-3xl mx-auto px-6">
+        <h2 className="text-2xl font-bold text-center mb-6">
+          Technical Specifications
+        </h2>
+
+        <Accordion title="Certifications">
+          OEKO-TEX, Bluesign, CPSIA compliant
+        </Accordion>
+
+        <Accordion title="Fabric">
+          Moisture-wicking, antimicrobial textile
+        </Accordion>
+      </section>
+
+      {/* ---------------- PRICING ---------------- */}
+      <section ref={pricingRef} className="py-20 text-center bg-sky-50">
         <h2 className="text-3xl font-bold mb-6">
           Choose Your Size
         </h2>
 
-        <p className="mb-6 text-red-500 font-semibold">
+        <p className="text-red-500 font-semibold mb-4">
           Only 17 left in stock
         </p>
 
         <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-          <a
-            href={STRIPE_SMALL}
-            className="bg-white p-8 rounded-xl shadow"
-          >
-            <h3 className="text-xl mb-2">Small</h3>
+          <a href={STRIPE_SMALL} className="bg-white p-8 rounded-xl shadow">
+            <h3>Small</h3>
             <p className="text-3xl font-bold">$79.99</p>
           </a>
 
-          <a
-            href={STRIPE_LARGE}
-            className="bg-slate-800 text-white p-8 rounded-xl"
-          >
-            <h3 className="text-xl mb-2">Large</h3>
+          <a href={STRIPE_LARGE} className="bg-slate-800 text-white p-8 rounded-xl">
+            <h3>Large</h3>
             <p className="text-3xl font-bold">$99.99</p>
           </a>
         </div>
 
-        <p className="mt-6 text-sm text-slate-600">
-          30-day money-back guarantee
+        <p className="mt-6 text-sm">
+          30-day money-back guarantee • Ships from Canada
         </p>
       </section>
 
-      {/* FAQ */}
-      <section className="py-20 max-w-3xl mx-auto px-6">
-        <h2 className="text-2xl font-bold mb-6 text-center">
-          FAQs
-        </h2>
+      {/* ---------------- FOOTER FIX ---------------- */}
+      <footer className="py-12 bg-slate-900 text-center">
+        <Image
+          src="/logo.avif"
+          alt="Sleep Hygienics Ltd"
+          width={140}
+          height={40}
+          className="mx-auto mb-4 brightness-0 invert opacity-80"
+        />
 
-        <Accordion title="Is it safe for sensitive skin?">
-          Yes — materials are non-toxic and designed for sensitive dogs.
-        </Accordion>
+        <p className="text-white/60 text-sm">
+          Made in the USA and Canada • Ships from Canada
+        </p>
 
-        <Accordion title="How long does it last?">
-          Tested for 50+ washes.
-        </Accordion>
-      </section>
-
-      {/* FOOTER */}
-      <footer className="py-10 text-center text-sm text-slate-500">
-        © {new Date().getFullYear()} Sleep Hygienics Ltd.
+        <p className="text-white/40 text-xs mt-2">
+          © {new Date().getFullYear()} Sleep Hygienics Ltd.
+        </p>
       </footer>
     </main>
   );
