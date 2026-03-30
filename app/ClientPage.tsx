@@ -603,4 +603,147 @@ export default function ClientPage() {
                   <div className="text-sm font-bold text-sky-600 uppercase tracking-widest mb-2">
                     {post.Date}
                   </div>
-                  <h3 className="text
+                  <h3 className="text-xl font-serif text-slate-800 mb-3">
+                    {post.Title}
+                  </h3>
+                  <p className="text-slate-600 leading-relaxed whitespace-pre-wrap">
+                    {post.Content}
+                  </p>
+                </div>
+              ))
+            ) : (
+              <p className="text-center text-slate-400">Loading insights...</p>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* TECHNICAL SPECS                                             */}
+      {/* ============================================================ */}
+      <section className="py-20 bg-white">
+        <div className="max-w-3xl mx-auto px-6">
+          <div className="text-center mb-10">
+            <SectionBadge icon={Shield}>Clinical Data</SectionBadge>
+            <h2 className="font-serif text-2xl md:text-3xl text-slate-800">
+              Technical Specifications
+            </h2>
+          </div>
+
+          <div className="mb-8 rounded-xl overflow-hidden shadow-sm bg-gray-50 aspect-[2.5/1] relative">
+            <Image
+              src="/specs.jpg"
+              alt="Product specifications and care label"
+              fill
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          <Accordion title="Certifications" defaultOpen>
+            <div className="grid sm:grid-cols-2 gap-3">
+              {[
+                "CPSIA Certified",
+                "EPA Standards Compliant",
+                "Prop 65 Compliant",
+                "REACH SVHC Compliant",
+                "RoHS 10 Compliant",
+                "OMMC Value of 5 (Liquid Moisture Mgmt)",
+              ].map((c) => (
+                <div key={c} className="flex items-center gap-2 text-sm">
+                  <ShieldCheck size={14} className="text-sky-500" /> {c}
+                </div>
+              ))}
+            </div>
+          </Accordion>
+
+          <Accordion title="Fabric Specifications">
+            <p className="mb-2">
+              <strong className="text-slate-800">Composition:</strong> 65%
+              moisture-wicking polyester, 35% nylon
+            </p>
+            <p className="mb-2">
+              <strong className="text-slate-800">Weight:</strong> 135 GSM
+              &mdash; lightweight yet durable
+            </p>
+            <p>
+              <strong className="text-slate-800">UV Protection:</strong>{" "}
+              UPF 50+ rating
+            </p>
+          </Accordion>
+
+          <Accordion title="Care Instructions">
+            <p className="mb-3">
+              Engineered to withstand up to{" "}
+              <strong className="text-slate-800">
+                50 home laundering cycles
+              </strong>{" "}
+              at high temperatures.
+            </p>
+            <div className="space-y-2">
+              {checks([
+                "Wash on medium heat setting",
+                "Wash with like colors only",
+                "Tumble dry on medium heat",
+                "Silver-ion protection maintained through all 50+ cycles",
+              ])}
+            </div>
+          </Accordion>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* FINAL CTA                                                   */}
+      {/* ============================================================ */}
+      <section className="py-20 bg-gradient-to-br from-sky-50 to-indigo-50 text-center">
+        <div className="max-w-xl mx-auto px-6">
+          <h2 className="font-serif text-3xl md:text-4xl text-slate-800 mb-4">
+            Your dog deserves clinical-grade comfort.
+          </h2>
+          <p className="text-base text-slate-500 mb-8">
+            Join thousands of pet owners who chose science over suffering.
+            Free shipping on every order.
+          </p>
+          <a
+            href="#pricing"
+            onClick={goToPricing}
+            className="inline-flex items-center gap-2.5 rounded-xl bg-gradient-to-r from-sky-600 to-sky-700 px-8 py-4 text-base font-bold text-white shadow-lg shadow-sky-200 hover:shadow-xl hover:shadow-sky-300 transition-all no-underline"
+          >
+            Get Relief for Your Dog
+            <ArrowRight size={18} />
+          </a>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* FOOTER                                                      */}
+      {/* ============================================================ */}
+      <footer className="py-12 bg-slate-800 text-center text-sm text-white/40">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex items-center justify-center gap-2.5 mb-4">
+             <Image
+                src="/logo.avif"
+                alt="Sleep Hygienics Ltd. Logo"
+                width={150}
+                height={50}
+                className="h-8 w-auto brightness-0 invert opacity-60"
+             />
+          </div>
+          <a
+            href="mailto:info@sleephygienicsltd.com"
+            className="text-white/60 hover:text-white/80 transition inline-block mb-4 no-underline"
+          >
+            info@sleephygienicsltd.com
+          </a>
+          <p className="mt-2">
+            &copy; {new Date().getFullYear()} Sleep Hygienics Ltd. All
+            rights reserved.
+          </p>
+          <p className="mt-2">
+            The Rx Clinical Pet Blanket&trade; is classified as a
+            Class&nbsp;1 Veterinary Medical Device.
+          </p>
+        </div>
+      </footer>
+    </main>
+  );
+}
