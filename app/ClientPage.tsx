@@ -357,13 +357,14 @@ export default function ClientPage() {
                 ])}
               </div>
             </div>
-            <div className="rounded-2xl overflow-hidden shadow-lg bg-sky-50 aspect-video relative">
+            <div className="rounded-2xl overflow-hidden shadow-lg relative">
               <Image
-               src="/solution.jpg"
-               alt="Silver-Ion technology visualization"
-               fill
-               className="w-full h-full object-contain"
-             />
+                src="/solution.jpg"
+                alt="Silver-Ion technology visualization"
+                width={800}
+                height={600}
+                className="w-full h-auto"
+              />
             </div>
           </div>
 
