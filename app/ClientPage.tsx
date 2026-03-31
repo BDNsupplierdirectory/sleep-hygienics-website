@@ -476,7 +476,7 @@ export default function ClientPage() {
         </div>
       </section>
 
-      {/* ============================================================ */}
+     {/* ============================================================ */}
       {/* PRICING                                                     */}
       {/* ============================================================ */}
       <section
@@ -497,17 +497,7 @@ export default function ClientPage() {
             </p>
           </div>
 
-         <div className="mb-12 rounded-2xl overflow-hidden shadow-lg max-w-4xl mx-auto relative">
-            <Image
-              src="/lifestyle.jpg"
-              alt="Dog sleeping on the Rx Clinical Pet Blanket"
-              width={1200}
-              height={800}
-              className="w-full h-auto"
-            />
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-7 max-w-3xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-7 max-w-3xl mx-auto mb-16">
             {/* Small */}
             <div className="bg-white rounded-2xl p-9 border border-gray-100 shadow-sm flex flex-col">
               <div className="text-xs font-bold text-sky-600 uppercase tracking-widest mb-2">
@@ -583,6 +573,18 @@ export default function ClientPage() {
               </a>
             </div>
           </div>
+
+          {/* The Dog Image - Moved below pricing & reduced size (max-w-2xl) */}
+          <div className="rounded-2xl overflow-hidden shadow-sm max-w-2xl mx-auto relative border border-sky-100/50">
+            <Image
+              src="/lifestyle.jpg"
+              alt="Dog sleeping on the Rx Clinical Pet Blanket"
+              width={1200}
+              height={800}
+              className="w-full h-auto"
+            />
+          </div>
+
         </div>
       </section>
 
